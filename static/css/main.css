@@ -1,0 +1,34 @@
+/* Global Styles */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+}
+
+.alert {
+/*
+ Відстань зверху 10 рх
+ Відстань справа 0 рх
+ Відстань знизу 5 рх
+ Відстань зліва 0 рх
+*/
+    margin: 10px 0 5px 0;
+}
+/* знайшли елемент футера по його унікальному ідентифікатору footer */
+#footer {
+ /* задаємо верхню межу елемента: ширина лінії, тип лінії, колір лінії */
+    border-top: 1px solid#dee2e6;
+ /* задаємо внутрішню відстань елемента до верхнього краю */
+    padding-top: 10px;
+}
+
+/* Group Selector */
+#group-selector {
+    margin-top: 10px;
+}
+#group-selector label {
+    line-height: calc(1.5em+ .75rem + 2px);
+}
+
+/* Table Styles */
+.table td {
+    vertical-align: middle;
+}
