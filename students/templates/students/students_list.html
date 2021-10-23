@@ -1,157 +1,71 @@
+{% extends "students/base.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="uk">
+{% block meta_title %}Студенти{% endblock meta_title %}
 
-<head>
-	<meta charset="UTF-8">
-	<title>Сервіс Обліку Студентів</title>
-	<meta name="description" content="Система Обліку студентів Навчального Закладу"
+{% block title %}База студентів{% endblock title %}
 
-	<!-- Include Styles -->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
-		  rel="stylesheet"
-		  integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
-		  crossorigin="anonymous">
-	<link rel="stylesheet" href="{% static 'css/main.css' %}">
+{% block content %}
+<!-- Add student Button -->
+<a href="{% url 'students_add' %}" class="btn btn-primary mb-3" role="button">Додати студента</a>
 
-	<!-- <style type="text/css">.col-sm-12, .col-sm-4, .col-sm-8 {border: 1px solid red;}</style> -->
-
-</head>
-
-<body>
-	<!-- Start Container -->
-	<div class="container">
-
-		<!-- Start Header -->
-		<div class="row mt-3" id="header">
-			<!-- Logo -->
-			<div class="col-sm-8">
-				<h1>Сервіс Обліку Студентів</h1>
+<!-- Start Students Listing -->
+<table class="table table-hover table-striped">
+	<thead>
+	<tr>
+		<th><a href="#">№</a></th>
+		<th>Фото</th>
+		<th><a href="#">Прізвище&uarr;</a></th>
+		<th><a href="#">Ім'я</a></th>
+		<th><a href="#">№ Білету</a></th>
+		<th>Дії</th>
+	</tr>
+	</thead>
+	<tbody>
+	{% for student in students %}
+	<tr>
+		<td>{{ forloop.counter }}</td>
+		<td><img src="{% static student.image %}" height="35" width="35" class="rounded-circle"></td>
+		<td><a href="{% url 'students_edit' student.id %}">{{ student.last_name }}</a></td>
+		<td><a href="{% url 'students_edit' student.id %}">{{ student.first_name }}</a></td>
+		<td>{{ student.ticket }}</td>
+		<td>
+			<div class="dropdown">
+				<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" >
+					Дія
+				</button>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="{% url 'students_edit' student.id %}">Редагувати</a>
+					<a class="dropdown-item" href="/journal/{{ student.id }}">Відвідування</a>
+					<a class="dropdown-item" href="{% url 'students_delete' student.id %}">Видалити</a>
+				</div>
 			</div>
+		</td>
+	</tr>
+	{% endfor %}
+	</tbody>
+</table>
+<!-- End Students Listing -->
 
-			<!-- Group Selector -->
-			<div class="col-sm-4 d-flex" id="group-selector">
-				<label for="group" class="mr-1"><strong>Група: </strong></label>
-				<select class="form-select" name="group" id="group">
-					<option value="">Усі студенти</option>
-					<option value="">МтМ-21, Літвінов Дмитро (№254)</option>
-					<option value="">МтМ-22, Віталій Подоба (№410)</option>
-				</select>
-			</div>
-		</div>
-		<!-- End Header -->
+<nav aria-label="Page navigation">
+	<ul class="pagination">
+	<li class="page-item">
+	  <a class="page-link" href="#" aria-label="Previous">
+		<span aria-hidden="true">&laquo;</span>
+	  </a>
+	</li>
+	<li class="page-item"><a class="page-link" href="#">1</a></li>
+	<li class="page-item active"><a class="page-link" href="#">2</a></li>
+	<li class="page-item"><a class="page-link" href="#">3</a></li>
+	<li class="page-item"><a class="page-link" href="#">4</a></li>
+	<li class="page-item"><a class="page-link" href="#">5</a></li>
+	<li class="page-item">
+	  <a class="page-link" href="#" aria-label="Next">
+		<span aria-hidden="true">&raquo;</span>
+	  </a>
+	</li>
+	</ul>
+</nav>
+{% endblock content %}
 
-		<!-- Start SubHeader -->
-		<div class="row" id="sub-header">
-			<div class="col-sm-12">
-				<ul class="nav nav-tabs">
-					<li class="nav-item">
-					<a class="nav-link active" aria-current="page" href="{% url 'home' %}">Студенти</a>
-					</li>
-					<li class="nav-item">
-					<a class="nav-link" href="/journal">Відвідування</a>
-					</li>
-					<li class="nav-item">
-					<a class="nav-link" href="{% url 'groups' %}">Групи</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<!-- End SubHeader -->
 
-		<!-- Start Main Page Content -->
-		<div class="row" id="content-columns">
-			<div class="col-sm-12" id="content-column">
-
-				<!-- Status Message -->
-				<div class="alert alert-warning" role="alert">Зміни скасовано</div>
-
-				<h2 class="my-3">База студентів</h2>
-
-				<!-- Add student Button -->
-				<a href="{% url 'students_add' %}" class="btn btn-primary mb-3" role="button">Додати студента</a>
-
-				<!-- Start Students Listing -->
-				<table class="table table-hover table-striped">
-					<thead>
-					<tr>
-						<th>№</th>
-						<th>Фото</th>
-						<th>Прізвище</th>
-						<th>Ім'я</th>
-						<th>№ Білету</th>
-						<th>Дії</th>
-					</tr>
-					</thead>
-					<tbody>
-					{% for student in students %}
-					<tr>
-						<td>{{ forloop.counter }}</td>
-						<td><img src="{% static student.image %}" height="35" width="35" class="rounded-circle"></td>
-						<td><a title="Редагувати" href="{% url 'students_edit' student.id %}">{{ student.last_name }}</a></td>
-						<td><a title="Редагувати" href="{% url 'students_edit' student.id %}">{{ student.first_name }}</a></td>
-						<td>{{ student.ticket }}</td>
-						<td>
-						<div class="dropdown">
-							<button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" >
-								Дія
-							</button>
-							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="{% url 'students_edit' student.id %}">Редагувати</a></li>
-								<li><a class="dropdown-item" href="/journal/{{ student.id }}">Відвідування</a></li>
-								<li><a class="dropdown-item" href="{% url 'students_delete' student.id %}">Видалити</a></li>
-							</ul>
-							</div>
-						</td>
-					</tr>
-					{% endfor %}
-					</tbody>
-				</table>
-				<nav aria-label="Page navigation">
-					<ul class="pagination">
-					<li class="page-item">
-					  <a class="page-link" href="#" aria-label="Previous">
-						<span aria-hidden="true">&laquo;</span>
-					  </a>
-					</li>
-					<li class="page-item"><a class="page-link" href="#">1</a></li>
-					<li class="page-item active"><a class="page-link" href="#">2</a></li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
-					<li class="page-item"><a class="page-link" href="#">4</a></li>
-					<li class="page-item"><a class="page-link" href="#">5</a></li>
-					<li class="page-item">
-					  <a class="page-link" href="#" aria-label="Next">
-						<span aria-hidden="true">&raquo;</span>
-					  </a>
-					</li>
-					</ul>
-				</nav>
-				<!-- End Students Listing -->
-			</div>
-		</div>
-		<!-- End Main Page Content -->
-
-		<!-- Start Footer -->
-		<div class="row" id="footer">
-			<div class="col-sm-12">&copy; 2020 Сервіс Обліку Студентів</div>
-		</div>
-		<!-- End Footer -->
-
-	</div>
-	<!-- End Container -->
-
-	<!-- Javascripts Section -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-			integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-			crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-			integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-			crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
-			integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
-			crossorigin="anonymous"></script>
-
-</body>
-
-</html>
