@@ -1,0 +1,213 @@
+{% extends "students/base.html" %}
+{% load static %}
+
+{% block meta_title %}Студенти{% endblock meta_title %}
+
+{% block title %}Облік Відвідування{% endblock title %}
+
+{% block content %}
+<!-- Start Students Listing -->
+<div class="row">
+	<div class="col-sm-12 text-center monthmargin">
+		&#8592 June 2020 &#8594
+	</div>
+</div>
+<table class="table table-hover table-striped table-bordered">
+	<thead>
+	<tr class="text-center">
+		<th>#</th>
+		<th>Студент&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</th>
+		<th>Mo<br>1</th>
+		<th>Tu<br>2</th>
+		<th>We<br>3</th>
+		<th>Th<br>4</th>
+		<th>Fr<br>5</th>
+		<th>Sa<br>6</th>
+		<th>Su<br>7</th>
+		<th>Mo<br>8</th>
+		<th>Tu<br>9</th>
+		<th>We<br>10</th>
+		<th>Th<br>11</th>
+		<th>Fr<br>12</th>
+		<th>Sa<br>13</th>
+		<th>Su<br>14</th>
+		<th>Mo<br>15</th>
+		<th>Tu<br>16</th>
+		<th>We<br>17</th>
+		<th>Th<br>18</th>
+		<th>Fr<br>19</th>
+		<th>Sa<br>20</th>
+		<th>Su<br>21</th>
+		<th>Mo<br>22</th>
+		<th>Tu<br>23</th>
+		<th>We<br>24</th>
+		<th>Th<br>25</th>
+		<th>Fr<br>26</th>
+		<th>Sa<br>27</th>
+		<th>Su<br>28</th>
+		<th>Mo<br>29</th>
+		<th>Tu<br>30</th>
+	</tr>
+	</thead>
+	<tbody>
+	{% for student in students %}
+	<tr>
+		<td>{{ forloop.counter }}</td>
+		<td><a title="Редагувати" href="{% url 'students_edit' student.id %}">
+			{{ student.name }}</a></td>
+		<td>
+			<div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+			</div>
+		</td>
+		<td>
+			<div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+			</div>
+		</td>
+		<td>
+			<div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+			</div>
+		</td>
+		<td>
+			<div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+			</div>
+		</td>
+		<td>
+			<div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+			</div>
+		</td>
+		<td>
+			<div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+			</div>
+		</td>
+		<td>
+			<div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+			</div>
+		</td>
+		<td>
+			<div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+			</div>
+		</td>
+		<td>
+			<div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+			</div>
+		</td>
+		<td>
+			<div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+			</div>
+		</td>
+		<td>
+			<div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+			</div>
+		</td>
+		<td>
+			<div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+			</div>
+		</td>
+		<td>
+			<div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+			</div>
+		</td>
+		<td>
+			<div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+			</div>
+		</td>
+		<td>
+			<div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+			</div>
+		</td>
+		<td>
+			<div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+			</div>
+		</td>
+		<td>
+			<div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+			</div>
+		</td>
+		<td>
+			<div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+			</div>
+		</td>
+		<td>
+			<div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+			</div>
+		</td>
+		<td>
+			<div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+			</div>
+		</td>
+		<td>
+			<div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+			</div>
+		</td>
+		<td>
+			<div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+			</div>
+		</td>
+		<td>
+			<div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+			</div>
+		</td>
+		<td>
+			<div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+			</div>
+		</td>
+		<td>
+			<div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+			</div>
+		</td>
+		<td>
+			<div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+			</div>
+		</td>
+		<td>
+			<div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+			</div>
+		</td>
+		<td>
+			<div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+			</div>
+		</td>
+		<td>
+			<div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+			</div>
+		</td>
+		<td>
+			<div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+			</div>
+		</td>
+	</tr>
+	{% endfor %}
+	</tbody>
+</table>
+{% endblock content %}
+
