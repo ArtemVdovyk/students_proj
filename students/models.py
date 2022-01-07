@@ -39,3 +39,7 @@ class Student(models.Model):
         blank=True,
         verbose_name="Додаткові нотатки"
     )
+
+    class Meta:
+        verbose_name = "Студент"
+        verbose_name_plural = "Студенти"
