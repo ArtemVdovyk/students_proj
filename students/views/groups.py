@@ -2,7 +2,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from students.models import Group
+from students.models.groups import Group
 
 
 # Views for Groups
