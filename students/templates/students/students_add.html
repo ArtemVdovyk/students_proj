@@ -10,11 +10,11 @@
 <form action="{% url 'students_add' %}" method="post" enctype="multipart/form-data">
 	{% csrf_token %}
 	<div>
-		<label for="first_name">Ім'я</label>
+		<label for="first_name">Ім'я*</label>
 		<input type="text" value="" name="first_name" id="first_name" placeholder="Введіть ваше ім'я"/>
 	</div>
 	<div>
-		<label for="last_name">Прізвище</label>
+		<label for="last_name">Прізвище*</label>
 		<input type="text" value="" name="last_name" id="last_name" placeholder="Введіть ваше прізвище"/>
 	</div>
 	<div>
@@ -22,7 +22,7 @@
 		<input type="text" value="" name="middle_name" id="middle_name" placeholder="Введіть ваше по-батькові"/>
 	</div>
 		<div>
-		<label for="birthday">Дата Нароження</label>
+		<label for="birthday">Дата Нароження*</label>
 		<input type="text" value="" name="birthday" id="birthday" placeholder="Напр. 1984-12-30"/>
 	</div>
 	<div>
@@ -30,11 +30,11 @@
 		<input type="file" value="" name="photo" id="photo"/>
 	</div>
 	<div>
-		<label for="ticket">Білет</label>
+		<label for="ticket">Білет*</label>
 		<input type="text" value="" name="ticket" id="ticket" placeholder="Введіть № білету"/>
 	</div>
 		<div>
-		<label for="student_group">Група</label>
+		<label for="student_group">Група*</label>
 		<select name="student_group" id="student_group">
 			<option value="">Виберіть групу</option>
 			{% for group in groups %}
