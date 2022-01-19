@@ -98,7 +98,8 @@ def students_add(request):
                 # save it to database
                 student.save()
                 # redirect user to students list
-                return HttpResponseRedirect(reverse('home'))
+                return HttpResponseRedirect(f"{reverse('home')}?status_message=Студента {data['first_name']} "
+                                            f"{data['last_name']} успішно додано!")
             else:
                 # render form with errors and previous user input
                 return render(request, 'students/students_add.html', {'groups': Group.objects.all().order_by('title'),
@@ -106,7 +107,7 @@ def students_add(request):
 
         elif request.POST.get('cancel_button') is not None:
             # redirect to home page on cancel button
-            return HttpResponseRedirect(reverse('home'))
+            return HttpResponseRedirect(f"{reverse('home')}?status_message=Додавання студента скасовано!")
     else:
         # initial form render
         return render(request, 'students/students_add.html', {'groups': Group.objects.all().order_by('title')})
