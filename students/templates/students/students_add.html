@@ -42,7 +42,7 @@
 		<select name="student_group" id="student_group">
 			<option value="">Виберіть групу</option>
 			{% for group in groups %}
-			<option value="{{ group.id }}" {% if group.id == request.POST.student_group|add:0 %}selected="selected"{% endfor %}>
+			<option value="{{ group.id }}" {% if group.id == request.POST.student_group|add:0 %}selected="selected"{% endif %}>
 				{{ group.title }}
 			</option>
 			{% endfor %}
