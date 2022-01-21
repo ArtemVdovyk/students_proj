@@ -3,6 +3,11 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
 }
 
+/* Form styles */
+textarea, select, input {
+    max-width: 300px;
+}
+
 .alert {
 /*
  Відстань зверху 10 рх
