@@ -133,6 +133,8 @@ dmypy.json
 
 
 db.py
+constants.py
 demo_data.json
 .media/
+
 
