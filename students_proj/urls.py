@@ -3,7 +3,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 
-from students.views import students, groups, journal
+from students.views import students, groups, journal, contact_admin
 
 urlpatterns = [
     # Students urls
@@ -21,6 +21,8 @@ urlpatterns = [
     # Journal urls
     path('journal/', journal.students_visits, name='journal'),
 
+    # Contact Admin Form
+    path('contact-admin/', contact_admin.contact_admin, name='contact_admin'),
 
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

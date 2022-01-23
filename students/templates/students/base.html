@@ -46,13 +46,26 @@
 			<div class="col-sm-12">
 				<ul class="nav nav-tabs">
 					<li class="nav-item">
-					<a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{% url 'home' %}">Студенти</a>
+						<a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{% url 'home' %}">
+							Студенти
+						</a>
 					</li>
 					<li class="nav-item">
-					<a class="nav-link {% if '/journal' in request.path %}active{% endif %}" href="/journal">Відвідування</a>
+						<a class="nav-link {% if '/journal' in request.path %}active{% endif %}" href="/journal">
+							Відвідування
+						</a>
 					</li>
 					<li class="nav-item">
-					<a class="nav-link  {% if '/groups' in request.path %}active{% endif %}" href="{% url 'groups' %}">Групи</a>
+						<a class="nav-link  {% if '/groups' in request.path %}active{% endif %}"
+						   href="{% url 'groups' %}">
+							Групи
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link  {% if '/contact-admin' in request.path %}active{% endif %}"
+						   href="{% url 'contact_admin' %}">
+							Контакт
+						</a>
 					</li>
 				</ul>
 			</div>
@@ -66,9 +79,9 @@
 				<!-- Status Message -->
 				{% block status_message %}
 				{% if request.GET.status_message %}
-				<div class="alert alert-warning" role="alert">
-					{{ request.GET.status_message }}
-				</div>
+					<div class="alert alert-warning" role="alert">
+						{{ request.GET.status_message }}
+					</div>
 				{% endif %}
 				{% endblock %}
 
