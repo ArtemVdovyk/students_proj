@@ -7,6 +7,8 @@ from django.urls import reverse
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
+from django.views.generic.edit import FormView
+
 
 class ContactForm(forms.Form):
 
@@ -68,3 +70,19 @@ def contact_admin(request):
     else:
         form = ContactForm()
         return render(request, 'contact_admin/form.html', {'form': form})
+
+
+# class ContactView(FormView):
+#     template_name = 'contact_form.html'
+#     form_class = ContactForm
+#     success_url = '/email-sent/'
+#
+#     def form_valid(self, form):
+#         """This method is called for valid data"""
+#         subject = form.cleaned_data['subject']
+#         message = form.cleaned_data['message']
+#         from_email = form.cleaned_data['from_email']
+#
+#         send_mail(subject, message, from_email, ['admin@gmail.com'])
+#
+#         return super().form_valid(form)

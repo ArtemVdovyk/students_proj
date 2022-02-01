@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from datetime import datetime
+from django.views.generic import UpdateView
 
 from students.models.students import Student
 from students.models.groups import Group
@@ -111,6 +112,24 @@ def students_add(request):
     else:
         # initial form render
         return render(request, 'students/students_add.html', {'groups': Group.objects.all().order_by('title')})
+
+
+class StudentUpdateView(UpdateView):
+    model = Student
+    fields = '__all__'
+    template_name = 'students/students_edit.html'
+
+    def get_success_url(self):
+        return f"{reverse('home')}?status_message=Студента успішно збережено!"
+
+    def post(self, request, *args, **kwargs):
+        if request.POST.get('cancel_button'):
+            return HttpResponseRedirect(f"{reverse('home')}?status_message=Редагування студента відмінено!")
+        else:
+            return super().post(request, *args, **kwargs)
+
+    
+
 
 
 def students_edit(request, sid):
