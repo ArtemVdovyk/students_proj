@@ -6,7 +6,7 @@ from django.forms import ModelForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from django.views.generic import UpdateView
+from django.views.generic import UpdateView, DeleteView
 from datetime import datetime
 
 from students.models.students import Student
@@ -161,5 +161,9 @@ class StudentUpdateView(UpdateView):
             return super().post(request, *args, **kwargs)
 
 
-def students_delete(request, sid):
-    return HttpResponse('<h1>Delete Student %s</h1>' % sid)
+class StudentDeleteView(DeleteView):
+    model = Student
+    template_name = 'students/students_confirm_delete.html'
+
+    def get_success_url(self):
+        return f"{reverse('home')}?status_message=Студента успішно видалено!"

@@ -1,6 +1,8 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views.generic import DeleteView
+from datetime import datetime
 
 from students.models.groups import Group
 
@@ -41,5 +43,9 @@ def groups_edit(request, gid):
     return HttpResponse('<h1>Edit Group %s</h1>' % gid)
 
 
-def groups_delete(request, gid):
-    return HttpResponse('<h1>Delete Group %s</h1>' % gid)
+class GroupDeleteView(DeleteView):
+    model = Group
+    template_name = 'students/groups_confirm_delete.html'
+
+    def get_success_url(self):
+        return f"{reverse('home')}?status_message=Групу успішно видалено!"
