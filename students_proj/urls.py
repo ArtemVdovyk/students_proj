@@ -14,8 +14,8 @@ urlpatterns = [
 
     # Groups urls
     path('groups/', groups.groups_list, name='groups'),
-    path('groups/add/', groups.groups_add, name='groups_add'),
-    path('groups/<int:gid>/edit/', groups.groups_edit, name='groups_edit'),
+    path('groups/add/', groups.GroupAddView.as_view(), name='groups_add'),
+    path('groups/<int:pk>/edit/', groups.GroupUpdateView.as_view(), name='groups_edit'),
     path('groups/<int:pk>/delete/', groups.GroupDeleteView.as_view(), name='groups_delete'),
 
     # Journal urls

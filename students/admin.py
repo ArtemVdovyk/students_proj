@@ -14,7 +14,7 @@ class StudentFormAdmin(ModelForm):
         If yes, then ensure it's the same as selected group."""
         # get group where current student is a leader
         group = Group.objects.filter(leader=self.instance).first()
-        if group and (self.cleaned_data['student_group'] != group):
+        if group and self.cleaned_data['student_group'] != group:
             raise ValidationError('Cтудент є старостою іншої групи.', code='invalid')
 
         return self.cleaned_data['student_group']
@@ -34,6 +34,18 @@ class StudentAdmin(admin.ModelAdmin):
         return reverse('students_edit', kwargs={'pk': obj.id})
 
 
+class GroupFormAdmin(ModelForm):
+
+    def clean_leader(self):
+        """Check if student is in this group."""
+        # get students in current group
+        students = Student.objects.filter(student_group=self.instance)
+        if students and self.cleaned_data['leader'] not in students:
+            raise ValidationError('Cтудент не належить до поточної групи.', code='invalid')
+
+        return self.cleaned_data['leader']
+
+
 class GroupAdmin(admin.ModelAdmin):
     list_display = ['title', 'leader']
     list_display_links = ['title']
@@ -42,6 +54,7 @@ class GroupAdmin(admin.ModelAdmin):
     list_filter = ['title']
     list_per_page = 10
     search_fields = ['title', 'leader', 'notes']
+    form = GroupFormAdmin
 
     def view_on_site(self, obj):
         return reverse('groups_edit', kwargs={'pk': obj.id})
