@@ -5,6 +5,7 @@ from django.urls import reverse
 
 from .models.students import Student
 from .models.groups import Group
+from .models import MonthJournal
 
 
 class StudentFormAdmin(ModelForm):
@@ -62,4 +63,4 @@ class GroupAdmin(admin.ModelAdmin):
 
 admin.site.register(Student, StudentAdmin)
 admin.site.register(Group, GroupAdmin)
-
+admin.site.register(MonthJournal)
