@@ -19,7 +19,7 @@ urlpatterns = [
     path('groups/<int:pk>/delete/', groups.GroupDeleteView.as_view(), name='groups_delete'),
 
     # Journal urls
-    path('journal/', journal.students_visits, name='journal'),
+    path('journal/', journal.JournalView.as_view(), name='journal'),
 
     # Contact Admin Form
     path('contact-admin/', contact_admin.contact_admin, name='contact_admin'),
