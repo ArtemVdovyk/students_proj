@@ -5,7 +5,8 @@ from dateutil.relativedelta import relativedelta
 from django.urls import reverse
 from django.views.generic.base import TemplateView
 
-from ..models import MonthJournal, Student
+from ..models import MonthJournal
+from ..models.students import Student
 from ..util import paginate
 
 
@@ -18,7 +19,7 @@ class JournalView(TemplateView):
 
         # check if we need to display some specific month
         if self.request.GET.get('month'):
-            month = datetime.strptime(self.request.GET.get['month'], '%Y-%m-%d').date()
+            month = datetime.strptime(self.request.GET['month'], '%Y-%m-%d').date()
         else:
             # otherwise, just displaying current month data
             today = datetime.today()
@@ -26,8 +27,8 @@ class JournalView(TemplateView):
 
         # calculate current, previous and next month details;
         # we need this for month navigation element in template
-        next_month = month + relativedelta(month=1)
-        prev_month = month - relativedelta(month=1)
+        next_month = month + relativedelta(months=1)
+        prev_month = month - relativedelta(months=1)
         context['prev_month'] = prev_month.strftime('%Y-%m-%d')
         context['next_month'] = next_month.strftime('%Y-%m-%d')
         context['year'] = month.year
@@ -39,7 +40,7 @@ class JournalView(TemplateView):
         # prepare variable for template to generate journal able header elements
         myear, mmonth = month.year, month.month
         number_of_days = monthrange(myear, mmonth)[1]
-        context['month-header'] = [
+        context['month_header'] = [
             {'day': d, 'verbose': day_abbr[weekday(myear, mmonth, d)][:2]} for d in range(1, number_of_days+1)
         ]
 
@@ -75,5 +76,5 @@ class JournalView(TemplateView):
         # apply pagination, 10 students per page
         context = paginate(students, 10, self.request, context, var_name='students')
 
-        # finally return updated context with paginated students
+        # finally, return updated context with paginated students
         return context
