@@ -4,6 +4,7 @@ from datetime import datetime, date
 from dateutil.relativedelta import relativedelta
 from django.urls import reverse
 from django.views.generic.base import TemplateView
+from django.http import JsonResponse
 
 from ..models import MonthJournal
 from ..models.students import Student
@@ -78,3 +79,6 @@ class JournalView(TemplateView):
 
         # finally, return updated context with paginated students
         return context
+
+    def post(self, request, *args, **kwargs):
+        return JsonResponse({'key': 'value'})
