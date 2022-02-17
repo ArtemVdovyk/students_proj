@@ -37,8 +37,27 @@ def paginate(objects, size, request, context, var_name='object_list'):
     return context
 
 
+def get_current_group(request):
+    """Return currently selected group or None"""
+
+    # we remember selected group ina cookie
+    pk = request.COOKIES.get('current_group')
+
+    if pk:
+        from .models.groups import Group
+        try:
+            group = Group.objects.get(pk=int(pk))
+        except Group.DoesNotExist:
+            return None
+        else:
+            return group
+    else:
+        return None
+
+
 def get_groups(request):
     """Returns list of existing groups"""
+
     # deferred import of Group model to avoid cycled imports
     from .models.groups import Group
 
@@ -50,6 +69,6 @@ def get_groups(request):
         groups.append({'id': group.id,
                        'title': group.title,
                        'leader': group.leader and (f'{group.leader.first_name} {group.leader.last_name}' or None),
-                       'selected': cur_group and cur_group.id ==group.id or False
+                       'selected': cur_group and cur_group.id == group.id or False
                        })
     return groups
