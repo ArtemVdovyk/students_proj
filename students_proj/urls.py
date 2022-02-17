@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -19,7 +19,7 @@ urlpatterns = [
     path('groups/<int:pk>/delete/', groups.GroupDeleteView.as_view(), name='groups_delete'),
 
     # Journal urls
-    path('journal/', journal.JournalView.as_view(), name='journal'),
+    re_path(r'journal/(?:(?P<pk>\d+)/)?$', journal.JournalView.as_view(), name='journal'),
 
     # Contact Admin Form
     path('contact-admin/', contact_admin.contact_admin, name='contact_admin'),
