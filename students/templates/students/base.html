@@ -34,8 +34,11 @@
 				<label for="group" class="mr-1"><strong>Група:</strong></label>
 				<select class="custom-select" name="group" id="group">
 					<option value="">Усі студенти</option>
-					<option value="">МтМ-21, Літвінов Дмитро (№254)</option>
-					<option value="">МтМ-22, Віталій Подоба (№410)</option>
+					{% for group in GROUPS %}
+						<option value="{{ group.id }}" {% if group.selected %}selected="1"{% endif %}>
+							{{ group.title }}{% if group.leader %}, {{ group.leader }}{% endif %}
+						</option>
+					{% endfor %}
 				</select>
 			</div>
 		</div>
