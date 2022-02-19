@@ -8,7 +8,7 @@ from django.http import JsonResponse
 
 from ..models import MonthJournal
 from ..models.students import Student
-from ..util import paginate
+from ..util import paginate, get_current_group
 
 
 class JournalView(TemplateView):
@@ -45,8 +45,12 @@ class JournalView(TemplateView):
             {'day': d, 'verbose': day_abbr[weekday(myear, mmonth, d)][:2]} for d in range(1, number_of_days+1)
         ]
 
-        # get all students from database, or just one if we need to display journal for one student
-        if kwargs.get('pk'):
+        # get all students from database, or just one if we need to display journal for one student;
+        # also check if we need to filter by group
+        current_group =get_current_group(self.request)
+        if current_group:
+            queryset = (Student.objects.filter(student_group=current_group).order_by('last_name'))
+        elif kwargs.get('pk'):
             queryset = [Student.objects.get(pk=kwargs['pk'])]
         else:
             queryset = Student.objects.all().order_by('last_name')

@@ -11,10 +11,18 @@ from datetime import datetime
 
 from students.models.groups import Group
 
+from ..util import paginate, get_current_group
+
 
 # Views for Groups
 def groups_list(request):
-    groups = Group.objects.all()
+    # check if we need to show only one group of students
+    current_group = get_current_group(request)
+    if current_group:
+        groups = current_group
+    else:
+        # otherwise, show all students
+        groups = Group.objects.all()
 
     # try to order groups list
     order_by = request.GET.get('order_by', '')
@@ -25,19 +33,10 @@ def groups_list(request):
         if request.GET.get('reverse', '') == '1':
             groups = groups.reverse()
 
-    # paginate groups
-    paginator = Paginator(groups, 3)
-    page = request.GET.get('page')
-    try:
-        groups = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page
-        groups = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page result.
-        groups = paginator.page(paginator.num_pages)
+    # apply pagination, 3 students per page
+    context = paginate(groups, 3, request, {}, var_name='groups')
 
-    return render(request, 'students/groups_list.html', {'groups': groups})
+    return render(request, 'students/groups_list.html', context)
 
 
 class GroupForm(ModelForm):

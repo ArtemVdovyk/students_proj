@@ -33,7 +33,7 @@ function initGroupSelector(){
         // get value of currently selected group option
         var group = $(this).val();
 
-        if (group){
+        if (group) {
             // set cookie with expiration date 1 year since now;
             // cookie creation function takes period in days
             Cookies.set('current_group', group, {'path': '/', 'expires': 365});
