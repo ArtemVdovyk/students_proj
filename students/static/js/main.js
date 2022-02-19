@@ -35,7 +35,7 @@ function initGroupSelector(){
 
         if (group){
             // set cookie with expiration date 1 year since now;
-            // cookie creation function takes perion in days
+            // cookie creation function takes period in days
             Cookies.set('current_group', group, {'path': '/', 'expires': 365});
         } else {
             // otherwise we delete the cookie
